@@ -31,6 +31,10 @@ Route::get('event', function () {
     ]);
 });
 
+
+
+
+
 Route::get('list', function () {
     return view('list', [
         "title" => "List"
