@@ -27,11 +27,14 @@ Route::get('event', [EventController::class, 'index']);
 Route::post('event', [EventController::class, 'store']);
 Route::get('event/detailevent/{id}', [EventController::class, 'show']);
 
-// khusus adminn buat crud event
-Route::get('event/tambahevent', [EventController::class, 'create']);
-Route::get('event/edit/{id}', [EventController::class, 'edit']);
-Route::post('event/edit/{id}', [EventController::class, 'update']);
 
+
+Route::middleware(['auth'])->group(function () {
+    // khusus adminn buat crud event
+    Route::get('event/tambahevent', [EventController::class, 'create']);
+    Route::get('event/edit/{id}', [EventController::class, 'edit']);
+    Route::post('event/edit/{id}', [EventController::class, 'update']);
+});
 
 
 
