@@ -18,4 +18,5 @@ class Provinsi extends Model
     {
         return $this->hasMany('App\Models\Makanan');
     }
+    
 }
