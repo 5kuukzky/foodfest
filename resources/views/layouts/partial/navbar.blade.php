@@ -13,10 +13,10 @@
                     <a class="nav-link   {{ ($title ==='Home') ? 'active' : '' }}" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  {{ ($title ==='Provinsi') ? 'active' : '' }}" href="provinsi">Provinsi</a>
+                    <a class="nav-link  {{ ($title ==='Provinsi') ? 'active' : '' }}" href="/provinsi">Provinsi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  {{ ($title ==='Event') ? 'active' : '' }}" href="event">Event</a>
+                    <a class="nav-link  {{ ($title ==='Event') ? 'active' : '' }}" href="/event">Event</a>
                 </li>
             </ul>
         </div>

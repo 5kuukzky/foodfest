@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\ProvinsiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,20 +21,22 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('provinsi', function () {
-    return view('provinsi', [
-        "title" => "Provinsi"
-    ]);
-});
 
-Route::get('event', function () {
-    return view('event', [
-        "title" => "Event"
-    ]);
-});
+// khusus event
+Route::get('event', [EventController::class, 'index']);
+Route::post('event', [EventController::class, 'store']);
+Route::get('event/detailevent/{id}', [EventController::class, 'show']);
 
+// khusus adminn buat crud event
+Route::get('event/tambahevent', [EventController::class, 'create']);
+Route::get('event/edit/{id}', [EventController::class, 'edit']);
+Route::put('event/{id}', [EventController::class, 'update']);
 
 
+
+
+
+Route::get('provinsi', [ProvinsiController::class, 'index']);
 
 
 Route::get('list', function () {
@@ -47,11 +51,6 @@ Route::get('detail', function () {
     ]);
 });
 
-Route::get('detailevent', function () {
-    return view('detailevent', [
-        "title" => "Detail Event"
-    ]);
-});
 
 
 Route::get('/dashboard', function () {

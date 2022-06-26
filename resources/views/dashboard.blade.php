@@ -13,7 +13,7 @@
                 </div>
             </div>
             <a href="#" class="btn btn-primary mt-4">Tambah Makanan</a>
-            <a href="#" class="btn btn-secondary mt-4">Tambah Event</a>
+            <a href="event/tambahevent" class="btn btn-secondary mt-4">Tambah Event</a>
         </div>
     </div>
 </x-app-layout>

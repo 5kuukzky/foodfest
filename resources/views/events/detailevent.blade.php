@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 lg:h-screen">
             <div class="relative z-10 lg:py-16">
                 <div class="relative h-64 sm:h-80 lg:h-full">
-                    <img class="absolute inset-0 object-cover w-full h-full" src="assets/images/event/1.jpg"
+                    <img class="absolute inset-0 object-cover w-full h-full" src="/assets/images/event/1.jpg"
                         alt="Event  " />
                 </div>
             </div>
@@ -15,7 +15,8 @@
 
                 <div class="p-8 sm:p-16 lg:p-24">
                     <h1 class="text-2xl font-bold sm:text-3xl">
-                        Festival Jajanan Bango
+                        {{ $event->judul }}
+
                     </h1>
 
                     <p class="mt-4 text-gray-600">
