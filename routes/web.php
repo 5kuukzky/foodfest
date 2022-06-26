@@ -30,7 +30,7 @@ Route::get('event/detailevent/{id}', [EventController::class, 'show']);
 // khusus adminn buat crud event
 Route::get('event/tambahevent', [EventController::class, 'create']);
 Route::get('event/edit/{id}', [EventController::class, 'edit']);
-Route::put('event/{id}', [EventController::class, 'update']);
+Route::post('event/edit/{id}', [EventController::class, 'update']);
 
 
 
