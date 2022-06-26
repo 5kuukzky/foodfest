@@ -47,9 +47,11 @@ class EventController extends Controller
     {
         return view('events.updateevent', [
             "event" => Event::find($id),
+            "title" => "Update event"
         ]);
     }
-    public function update(Request $request){
-        dd($request);
+    public function update(Request $request, $id)
+    {
+        Event::find($id)->update([]);
     }
 }
