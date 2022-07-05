@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/all.min.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Foodfes || {{ $title }}</title>
+    <title>Foodfes | {{ $title }}</title>
 </head>
 
 <body>

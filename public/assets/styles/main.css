@@ -94,8 +94,17 @@ h5 {
     font-weight: 500;
 }
 
+.btn-secondary:hover {
+    background: navy;
+}
+
 .btn-thirdty {
     background: #31b380;
+    color: #fff;
+}
+
+.btn-thirdty:hover {
+    background: teal;
     color: #fff;
 }
 
@@ -164,9 +173,8 @@ h5 {
 }
 
 .btn-secondary {
-    background: #ffffff;
-    color: #e1ad01;
-    border: 2px solid #e1ad01;
+    background: indigo;
+    color: #fffff;
 }
 
 .banner {

@@ -16,7 +16,7 @@
         <div class="col-lg-10 col-md-11 col-11">
             <div class="card shadow-sm" style="position: relative;top:-40px;">
                 <div class="card-body">
-                    <form action="" method="POST">
+                    <form action="/" method="GET">
                         <div class="form-group">
                             <div class="input-group">
                                 <button class="btn border-0 btn-lg" type="button" id="button-addon1">
@@ -41,49 +41,20 @@
             </div>
         </div>
         <div class="row text-center">
+            @foreach ( $dataMakanan as $makanan )
+
             <div class="col-md-4 mb-3">
                 <div class="card">
-                    <img src="/assets/images/makanan/1.jpg" class="card-img-top" alt="Makanan">
+                    <img src="{{ asset('storage/image_makanan/'. $makanan->gambar) }}" class="card-img-top"
+                        alt="Makanan">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text"> Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the
-                            card's</p>
+                        <h5 class="card-title">{{ $makanan->nama }}</h5>
+                        <p class="card-text"> {{ $makanan->deskripsi }}</p>
                         <a href="#" class="btn btn-primary mt-4">Go somewhere</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img src="/assets/images/makanan/2.jpg" class="card-img-top" alt="Makanan">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                            of
-                            the
-                            card's
-                            content.</p>
-                        <a href="#" class="btn btn-primary mt-4">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card">
-                    <img src="/assets/images/makanan/3.jpg" class="card-img-top" alt="Makanan">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text"> >Some quick example text to build on the card title and make up the
-                            bulk
-                            of
-                            the
-                            card's
-                            content</p>
-                        <a href="#" class="btn btn-primary mt-4">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

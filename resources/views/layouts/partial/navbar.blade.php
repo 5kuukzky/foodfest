@@ -18,9 +18,30 @@
                 <li class="nav-item">
                     <a class="nav-link  {{ ($title ==='Event') ? 'active' : '' }}" href="/event">Event</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link  {{ ($title ==='About Us') ? 'active' : '' }}" href="/about-us">About Us</a>
+                </li>
             </ul>
         </div>
-    </div>
+        <div class="d-flex">
+            @if(!Auth::check())
+            <a href="login" class="btn btn-master btn-secondary mx-3">
+                Masuk
+            </a>
+            <a href="register" class="btn btn-master btn-primary">
+                Daftar
+            </a>
+            @else
+            <a href="/logout" class="btn btn-master btn-secondary mx-3">
+                Keluar
+            </a>
+            <a href="/tambah-makanan" class="btn btn-master btn-primary">
+                Tambah
+            </a>
+            @endif
+
+
+        </div>
     </div>
 </nav>
 

@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Event;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+
+use App\Models\Makanan;
 
 class EventController extends Controller
 {
     public function index()
     {
-
         return view('events.index', [
-            'acara' => DB::table('events')->get(), // passing variabel buat nampilin di index
+            'acara' => Event::get(),
             "title" => "Event"
         ]);
     }
@@ -24,34 +26,68 @@ class EventController extends Controller
         ]);
     }
 
-
     public function store(Request $request)
     {
-        Event::create([
-            'judul' => $request->judul,
-            'lokasi' => $request->lokasi,
-            'gambar' => $request->gambar,
-            'tanggal' => $request->tanggal
+        $validateData = $request->validate([
+            'judul' => 'required|max:255',
+            'lokasi' => 'required|max:255',
+            'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'tanggal' => 'required',
         ]);
-
-        return redirect('dashboard');
+        $gambar = $request->gambar;
+        $gambar_name = Str::random(5) . '-' . $gambar->getClientOriginalName();
+        if ($gambar->move(public_path('storage/image_event/'), $gambar_name)) {
+            Event::create([
+                'judul' => $request->judul,
+                'slug' => $request->slug,
+                'deskripsi' => $request->deskripsi,
+                'lokasi' => $request->lokasi,
+                'gambar' => $gambar_name,
+                'tanggal' => $request->tanggal,
+            ]);
+            return redirect('dashboard');
+        }
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $detail = Event::find($id);
-        return view('events.detailevent', ['event' => $detail,  "title" => "Detail Event"]); //banding buat di detail event pake id 
+        // $detail =Event:::where('id', $id)->first(); 
+        $detail = Event::where('slug', $slug)->first();
+        return view('events.detailevent', ['event' => $detail,  "title" => "List Makanan"]); //banding buat di detail event pake id 
     }
 
-    public function edit($id)
+    public function edit($slug)
     {
         return view('events.updateevent', [
-            "event" => Event::find($id),
+            "event" => Event::where('slug', $slug)->first(),
             "title" => "Update event"
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        Event::find($id)->update([]);
+        Event::where('slug', $slug)->update([
+            'judul' => $request->judul,
+            'slug' => $request->slug,
+            'deskripsi' => $request->deskripsi,
+            'lokasi' => $request->lokasi,
+            'gambar' => $request->gambar,
+            'tanggal' => $request->tanggal,
+        ]);
+        return redirect('dashboard');
+    }
+
+    public function destroy($id)
+    {
+        Event::find($id)->delete();
+        return back();
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard', [
+            'acara' => DB::table('events')->get(),
+            'provinsi' => DB::table('provinsis')->get(),
+            'makanan' => Makanan::all(),
+        ]);
     }
 }

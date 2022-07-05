@@ -2,16 +2,20 @@
 
 namespace App\Models;
 
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class makanan extends Model
 {
-    use HasFactory;
+    use HasFactory, Searchable;
     protected $fillable = [
-        'id_provinsi',
+
         'nama',
         'gambar',
+        'id_provinsi',
+        'slug',
         'deskripsi',
         'cara',
     ];
@@ -22,7 +26,18 @@ class makanan extends Model
     }
     public function provinsi()
     {
-        return $this->belongsTo('App\Models\Provinsi');
+        return $this->belongsTo('App\Models\Provinsi', 'id_provinsi');
     }
 
+    public function searchableAs()
+    {
+        return 'posts_index';
+    }
+
+    public function toSearchableArray()
+    {
+        return [
+            'nama' => $this->nama,
+        ];
+    }
 }

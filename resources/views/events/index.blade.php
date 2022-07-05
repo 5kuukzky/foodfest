@@ -9,13 +9,14 @@
         </div>
     </div>
 </div>
+
 <div class="container">
     .<div class="max-w-screen-xl px-4 py-8 mx-auto space-y-8">
         <div class="space-y-4">
             <h1 class="text-lg font-bold sm:text-xl">Segera Hadir</h1>
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 ">
                 @foreach ($acara as $namaAcara)
-                <a class="relative block group" href="{{ url('event/detailevent/'. $namaAcara->id) }}">
+                <a class="relative block group" href="{{ url('event/'. $namaAcara->slug) }}">
                     <span class="absolute inset-0 border-2 border-black border-dashed rounded-lg"></span>
                     <div
                         class="transition bg-white border-3 border-black rounded-lg group-hover:-translate-x-2 group-hover:-translate-y-2">
