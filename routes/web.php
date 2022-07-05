@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [IndexController::class, 'index']);
 
+// bibiw punya
 
 // khusus event
 Route::get('event', [EventController::class, 'index']);
