@@ -16,31 +16,46 @@
                     <a class="nav-link  {{ ($title ==='Provinsi') ? 'active' : '' }}" href="/provinsi">Provinsi</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link  {{ ($title ==='Event') ? 'active' : '' }}" href="/event">Event</a>
+                    <a class="nav-link  {{ ($title ==='Our Course') ? 'active' : '' }}" href="/course">Our Course</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link  {{ ($title ==='About Us') ? 'active' : '' }}" href="/about-us">About Us</a>
                 </li>
             </ul>
-        </div>
-        <div class="d-flex">
-            @if(!Auth::check())
-            <a href="login" class="btn btn-master btn-secondary mx-3">
-                Masuk
-            </a>
-            <a href="register" class="btn btn-master btn-primary">
-                Daftar
-            </a>
-            @else
-            <a href="/logout" class="btn btn-master btn-secondary mx-3">
-                Keluar
-            </a>
-            <a href="/tambah-makanan" class="btn btn-master btn-primary">
-                Tambah
-            </a>
-            @endif
 
+            <div class="d-flex">
 
+                @if(!Auth::check())
+                <a href="register" class="btn btn-master btn-primary">
+                    Daftar
+                </a>
+                <a href="login" class="btn btn-master btn-secondary mx-3">
+                    Masuk
+                </a>
+                @else
+                <p></p>
+
+                <a href="/tambah-makanan" class="btn btn-master btn-primary mx-3">
+                    Tambah
+                </a>
+
+                <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Halo, <strong> {{ Auth::user()->name }}</strong>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarDarkDropdownMenuLink">
+                                <li><a class="dropdown-item" href="profile">Akun anda</a></li>
+                                <li><a class="dropdown-item" href="logout">Keluar</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                @endif
+            </div>
         </div>
     </div>
 </nav>

@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\makanan;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Provinsi;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class MakananController extends Controller
 {
@@ -30,19 +33,25 @@ class MakananController extends Controller
             'cara' => 'required|max:255',
         ]);
 
-
+        $id = Auth::id();
         $gambarMkn = $request->gambar;
         $gambar_name = Str::random(6) . '-' . $gambarMkn->getClientOriginalName();
         if ($gambarMkn->move(public_path('storage/image_makanan/'), $gambar_name)) {
             // dd($request->all());
-            makanan::create([
+            $makanan = makanan::create([
                 'nama' => $request->nama,
                 'slug' => $request->slug,
                 'id_provinsi' => $request->id_provinsi,
+                'id_user' => $id,
                 'gambar' => $gambar_name,
                 'deskripsi' => $request->deskripsi,
                 'cara' => $request->cara,
             ]);
+            if ($makanan) {
+                Auth::User()->update([
+                    'poin' => Auth::user()->poin + 1
+                ]);
+            }
 
             return redirect('dashboard');
         }

@@ -6,7 +6,7 @@
             <h1 class="mt-8 font-normal hover:font-bold text-4xl">Provinsi</h1>
         </div>
 
-        <form class="flex items-center" action="/provinsi" method="GET">
+        <form class="flex items-center my-8" action="/provinsi" method="GET" autocomplete="off">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">

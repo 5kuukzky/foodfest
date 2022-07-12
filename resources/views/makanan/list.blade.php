@@ -2,10 +2,10 @@
 @section('container')
 
 <section>
+    @foreach ($list as $lists)
     <div class="max-w-screen-xl px-4 py-8 mx-auto">
         <div>
             <span class="inline-block w-12 h-1 bg-red-700"></span>
-            @foreach ($list as $lists)
 
             <h2 class="mt-1 text-2xl font-extrabold tracking-wide uppercase lg:text-3xl">
                 {{ $lists->provinsi->nama }}
@@ -25,8 +25,9 @@
                     {{ $lists->nama }}
                 </h1>
             </a>
-            @endforeach
         </div>
     </div>
+    @endforeach
 </section>
+
 @endsection

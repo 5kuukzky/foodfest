@@ -14,6 +14,7 @@ class makanan extends Model
 
         'nama',
         'gambar',
+        'id_user',
         'id_provinsi',
         'slug',
         'deskripsi',
@@ -27,6 +28,11 @@ class makanan extends Model
     public function provinsi()
     {
         return $this->belongsTo('App\Models\Provinsi', 'id_provinsi');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User', 'id_user');
     }
 
     public function searchableAs()

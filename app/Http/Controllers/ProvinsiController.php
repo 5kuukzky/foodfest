@@ -14,7 +14,7 @@ class ProvinsiController extends Controller
         if ($request->search) {
             $dataProvinsi = Provinsi::search($request->search)->paginate(12);
         } else {
-            $dataProvinsi = DB::table('provinsis')->paginate(12);
+            $dataProvinsi = Provinsi::paginate(12);
         }
         // dd(request('search'));
 
@@ -35,7 +35,7 @@ class ProvinsiController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nama' => 'required|max:255',
+            'nama' => 'required|max:255|string',
             'slug' => 'required|max:255',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'deskripsi' => 'required',
@@ -57,7 +57,6 @@ class ProvinsiController extends Controller
 
     public function show($slug)
     {
-        // $detail =Event:::where('id', $id)->first(); 
         $detail = Provinsi::where($slug)->first();
         return view('makanan.list', ['makanan' => $detail,  "title" => "List Makanan"]); //banding buat di detail event pake id 
     }

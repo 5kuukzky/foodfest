@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_admin',
+        'poin'
     ];
 
     /**
@@ -42,4 +43,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function makanan()
+    {
+        return $this->hasMany('App\Models\Makanan');
+    }
+
+    public function course()
+    {
+        return $this->hasMany('App\Models\userCourse', 'id_user');
+    }
 }

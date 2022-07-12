@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('makanans', function (Blueprint $table) {
             $table->id();
             $table->integer("id_provinsi");
+            $table->integer("id_user");
             $table->string("nama");
             $table->string("slug");
             $table->string("gambar");
