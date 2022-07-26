@@ -30,13 +30,12 @@
             <button type="submit"
                 class="inline-block  my-8 px-6 py-2.5 bg-yellow-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-purple-700 hover:shadow-lg focus:bg-purple-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-purple-800 active:shadow-lg transition duration-150 ease-in-out">Update</button>
     </form>
-    @if (session('empty'))
-    <div class="alert alert-danger">
-        {{ session('empty') }}
-    </div>
-    @endif
     <h1 class="text-2xl font-bold mt-6">Course Anda</h1>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-4 w-full">
+
+        @if ($course->count()==0)
+        <p>Anda belum memiliki course !</p>
+        @endif
         @foreach ($course as $yourcourse )
         <div class="relative p-4 w-full bg-white rounded-lg overflow-hidden shadow hover:shadow-md"
             style="min-height: 160px">

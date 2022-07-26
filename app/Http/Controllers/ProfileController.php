@@ -13,7 +13,7 @@ class ProfileController extends Controller
     {
         $courses = Auth::user()->course;
         $id = Auth::id();
-        if (userCourse::where('id_user', $id)->exists()) {
+        if (userCourse::where('id_user', $id)->get()  != NULL) {
             return view('profile.editprofile', [
                 "profile" => User::find($id),
                 "title" => "Update User",
