@@ -12,12 +12,13 @@ use App\Http\Controllers\ProvinsiController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index'])->name('/');
 
-// bibiw punya
 
 
 Route::middleware(['auth'])->group(function () {
+
+    Route::get('redirect', [EventController::class, 'redirect']);
     Route::get('/tambah-makanan', [MakananController::class, 'create']);
     Route::post('makanan', [MakananController::class, 'store']);
 
@@ -26,8 +27,10 @@ Route::middleware(['auth'])->group(function () {
     Route::put('profile', [ProfileController::class, 'update']);
     Route::get('logout', [ProfileController::class, 'logout']);
 
-    Route::middleware(['admin'])->group(function () {
+    Route::get('redeem/{id}', [CourseController::class, 'redeemToken']);
 
+    Route::middleware(['adminfood'])->group(function () {
+        Route::get('/dashboard', [EventController::class, 'dashboard'])->name('dashboard');
         //khusus admin buat crud provinsi
         Route::get('/tambah-provinsi', [ProvinsiController::class, 'create']);
         Route::get('edit-provinsi/{slug}', [ProvinsiController::class, 'edit']);
@@ -43,10 +46,9 @@ Route::middleware(['auth'])->group(function () {
         //khusus course
         Route::get('/tambah-course', [CourseController::class, 'create']);
         Route::post('course', [CourseController::class, 'store']);
-        Route::get('redeem/{$id}', [CourseController::class, 'redeemToken']);
-
-
-        Route::get('/dashboard', [EventController::class, 'dashboard'])->name('dashboard');
+        Route::get('edit-course/{slug}', [CourseController::class, 'edit']);
+        Route::put('edit-course/{slug}', [CourseController::class, 'update']);
+        Route::get('/course/hapus/{id}', [CourseController::class, 'destroy']);
     });
 });
 
@@ -63,11 +65,8 @@ Route::get('detail/{slug}', [MakananController::class, 'showDetail']);
 Route::get('course',  [CourseController::class, 'show']);
 
 
-$id = Auth::id();
-$makanan = Makanan::where('id_user', $id)->count();
 Route::view('about-us', 'aboutus', [
     "title" => "About Us",
-    "poin" => $makanan,
 ]);
 
 require __DIR__ . '/auth.php';

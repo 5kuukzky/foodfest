@@ -18,7 +18,8 @@ class makanan extends Model
         'id_provinsi',
         'slug',
         'deskripsi',
-        'cara',
+        'excerpt',
+
     ];
 
     public function komentar()

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\userCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,12 +11,17 @@ class ProfileController extends Controller
 {
     public function edit()
     {
-
+        $courses = Auth::user()->course;
         $id = Auth::id();
-        return view('profile.editprofile', [
-            "profile" => User::find($id),
-            "title" => "Update User"
-        ]);
+        if (userCourse::where('id_user', $id)->exists()) {
+            return view('profile.editprofile', [
+                "profile" => User::find($id),
+                "title" => "Update User",
+                'course' => $courses,
+            ]);
+        } else {
+            dd('anda belum memiliki course');
+        }
     }
 
     public function update(Request $request)

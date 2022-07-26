@@ -22,13 +22,11 @@
                     <table class="min-w-full text-sm border border-gray-100 divide-y-2 divide-gray-200">
                         @csrf
                         @method('delete')
-
                         <thead>
                             <tr class="divide-x divide-gray-100">
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Nama
                                     Provinsi</th>
-                                <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Deskripsi
-                                </th>
+
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Logo</th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Aksi</th>
                             </tr>
@@ -37,11 +35,10 @@
                         <tbody class="divide-y divide-gray-200">
                             <tr class="divide-x divide-gray-100">
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ $j->nama }}</td>
-                                <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $j->deskripsi }}</td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $j->logo }}</td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap"> <a style="color: red" href={{
-                                        url('provinsi/hapus/'. $j->id) }} >Hapus</a><a href={{ url('edit-provinsi/'.
-                                        $j->slug)
+                                        url('provinsi/hapus/'. $j->id) }} >Hapus</a><a style="color: cornflowerblue"
+                                        href={{ url('edit-provinsi/'. $j->slug)
                                         }}>Edit</a></td>
                             </tr>
                             @endforeach
@@ -64,13 +61,10 @@
                                 </th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Deskripsi
                                 </th>
-                                <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Cara Masak
-                                </th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Aksi</th>
                             </tr>
                         </thead>
                         @foreach ($makanan as $k)
-
                         <tbody class="divide-y divide-gray-200">
                             <tr class="divide-x divide-gray-100">
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ $k->nama }}</td>
@@ -80,7 +74,6 @@
                                 <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ $k->gambar }}
                                 </td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $k->deskripsi }}</td>
-                                <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $k->cara }}</td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap"> <a style="color: red" href={{
                                         url('makanan/hapus/'. $k->id) }} >Hapus</a><a href={{
                                         url('edit-makanan/'.$k->slug) }}>Edit</a></td>
@@ -102,7 +95,7 @@
                             <tr class="divide-x divide-gray-100">
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Nama</th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Thubnail
-                                    Provinsi</th>
+                                </th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Video
                                 </th>
                                 <th class="px-4 py-2 font-medium text-left text-gray-900 whitespace-nowrap">Harga
@@ -123,9 +116,8 @@
                                 </td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $course->harga }}</td>
                                 <td class="px-4 py-2 text-gray-700 whitespace-nowrap"> <a style="color: red" href={{
-                                        url('makanan/hapus/'. $course->id) }} >Hapus</a><a href={{
-                                        url('edit-makanan/'.$course->slug) }}>Edit</a></td>
-
+                                        url('course/hapus/'. $course->id) }} >Hapus</a><a href={{
+                                        url('edit-course/'.$course->slug) }}>Edit</a></td>
                             </tr>
                             @endforeach
                         </tbody>

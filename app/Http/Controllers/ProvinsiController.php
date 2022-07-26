@@ -36,18 +36,16 @@ class ProvinsiController extends Controller
     {
         $validateData = $request->validate([
             'nama' => 'required|max:255|string',
-            'slug' => 'required|max:255',
             'logo' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'deskripsi' => 'required',
         ]);
+        $slug = Str::slug($request->nama, '-');
         $logo = $request->logo;
         $gambar_name = Str::random(6) . '-' . $logo->getClientOriginalName();
         if ($logo->move(public_path('storage/image_provinsi/'), $gambar_name)) {
             Provinsi::create([
                 'nama' => $request->nama,
-                'slug' => $request->slug,
+                'slug' => $slug,
                 'logo' => $gambar_name,
-                'deskripsi' => $request->deskripsi
             ]);
 
             return redirect('dashboard');
@@ -72,10 +70,15 @@ class ProvinsiController extends Controller
 
     public function update(Request $request, $slug)
     {
+        $validateData = $request->validate([
+            'nama' => 'required|max:255|string',
+            'logo' => 'required',
+            'slug' => 'required,'
+        ]);
+        $slugs = Str::slug($request->nama, '-');
         Provinsi::where('slug', $slug)->update([
             'nama' => $request->nama,
-            'slug' => $request->slug,
-            'deskripsi' => $request->deskripsi,
+            'slug' => $slugs,
             'logo' => $request->logo,
         ]);
         return redirect('dashboard');

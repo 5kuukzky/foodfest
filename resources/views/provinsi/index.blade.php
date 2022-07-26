@@ -31,6 +31,15 @@
         </form>
 
         <div class="max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 ">
+            @forelse ($provinsi as $data)
+
+            @empty
+            <div class="alert alert-danger">
+                <tr>
+                    <td align="center">Provinsi Tidak Ditemukan !.</td>
+                </tr>
+            </div>
+            @endforelse
             <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                 @foreach ($provinsi as $p)
                 <a class="block p-4 border-2 border-gray-100 shadow-sm rounded-xl focus:outline-none focus:ring hover:border-yellow-400 hover:ring-1 hover:ring-gray-200"
@@ -44,6 +53,7 @@
                     </p>
                 </a>
                 @endforeach
+
             </div>
         </div>
         {{ $provinsi->links() }}

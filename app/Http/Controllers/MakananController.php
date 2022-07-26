@@ -26,13 +26,14 @@ class MakananController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'nama' => 'required',
-            'slug' => 'required|max:255',
+            'nama' => 'required|unique:makanans,nama|string',
+            'deskripsi' => 'required',
             'id_provinsi' => 'required',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'cara' => 'required|max:255',
-        ]);
 
+        ]);
+        $excerpt = Str::words($request->deskripsi, 12);
+        $slug = Str::slug($request->nama, '-');
         $id = Auth::id();
         $gambarMkn = $request->gambar;
         $gambar_name = Str::random(6) . '-' . $gambarMkn->getClientOriginalName();
@@ -40,12 +41,13 @@ class MakananController extends Controller
             // dd($request->all());
             $makanan = makanan::create([
                 'nama' => $request->nama,
-                'slug' => $request->slug,
+                'slug' => $slug,
+                'excerpt' => $excerpt,
                 'id_provinsi' => $request->id_provinsi,
                 'id_user' => $id,
                 'gambar' => $gambar_name,
                 'deskripsi' => $request->deskripsi,
-                'cara' => $request->cara,
+
             ]);
             if ($makanan) {
                 Auth::User()->update([
@@ -60,15 +62,17 @@ class MakananController extends Controller
     public function show($slug)
     {
         $provinsi = Provinsi::where('slug', $slug)->first();
-        $detail = Makanan::where('id_provinsi', $provinsi->id)->get();
-        return view('makanan.list', ['list' => $detail,  "title" => "List Makanan Daerah"]); //banding buat di detail event pake id 
+        $detail = Makanan::where('id_provinsi', $provinsi->id)->paginate(6);
+        return view('makanan.list', ['list' => $detail,  "title" => "List Makanan Daerah"]);
     }
 
     public function showDetail($slug)
     {
+        $rekomen = Makanan::inRandomOrder()->limit(3)->get();
         return view('makanan.detail', [
             "title" => "detail makanan",
             "detail" => Makanan::where('slug', $slug)->first(),
+            'rekomend' => $rekomen,
         ]);
     }
     public function edit($slug)
@@ -81,13 +85,13 @@ class MakananController extends Controller
     }
     public function update(Request $request, $slug)
     {
+        $slugs = Str::slug($request->nama, '-');
         Makanan::where('slug', $slug)->update([
             'nama' => $request->nama,
             'id_provinsi' => $request->id_provinsi,
-            'slug' => $request->slug,
+            'slug' => $slugs,
             'gambar' => $request->gambar,
             'deskripsi' => $request->deskripsi,
-            'cara' => $request->cara,
         ]);
         return redirect('dashboard');
     }
@@ -95,7 +99,6 @@ class MakananController extends Controller
     public function destroy($id)
     {
         Makanan::find($id)->delete();
-        // dd('makanan');
         return redirect()->route('dashboard')->with(['message' => 'Successfully deleted!!']);
     }
 }

@@ -14,7 +14,6 @@ class Provinsi extends Model
     protected $fillable = [
         'nama',
         'logo',
-        'deskripsi',
         'slug',
     ];
 

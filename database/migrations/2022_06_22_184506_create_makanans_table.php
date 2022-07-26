@@ -19,9 +19,9 @@ return new class extends Migration
             $table->integer("id_user");
             $table->string("nama");
             $table->string("slug");
+            $table->longText("deskripsi");
+            $table->longText("excerpt");
             $table->string("gambar");
-            $table->string("deskripsi");
-            $table->string("cara");
             $table->timestamps();
         });
     }

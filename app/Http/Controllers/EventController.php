@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Makanan;
 use App\Models\Provinsi;
@@ -17,8 +16,16 @@ class EventController extends Controller
     {
         return view('dashboard', [
             'provinsi' => Provinsi::get(),
-            'makanan' => Makanan::all(),
-            'courses' => Course::all(),
+            'makanan' => Makanan::get(),
+            'courses' => Course::get(),
         ]);
+    }
+    public function redirect()
+    {
+        if (Auth::user()->is_admin == 1) {
+            return redirect()->route('dashboard');
+        } else if (Auth::user()->is_admin == NULL) {
+            return redirect()->route('/');
+        }
     }
 }
